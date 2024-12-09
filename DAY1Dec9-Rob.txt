@@ -308,7 +308,7 @@ dial-peer voice 82 Voip
 @@@@@@
 !@@@EDGE ROUTE CONFIG
 config t
-   hostname EDGE-___
+   hostname EDGE-21
    enable secret pass
    service password-encryption
    no logging console
@@ -323,15 +323,15 @@ config t
       exec-timeout 0 0
    Int Gi 0/0/0
      description FIBEROPTIC-TO-SWITCH
-     ip add 10.__.__.1 255.255.255.0
+     ip add 10.21.21.1 255.255.255.0
 	 no shutdown
    Int Gi 0/0/1
      description PLDT-ME-WAN
-	 ip add 200.0.0.__ 255.255.255.0
+	 ip add 200.0.0.21 255.255.255.0
 	 no shutdown
    Int Loopback 0
      description VIRTUALIP-FOR-ROUTING
-	 ip add __.0.0.1 255.255.255.255
+	 ip add 21.0.0.1 255.255.255.255
  end
 
 OPEN SHORTEST PATH FIRST/OSPF CONFIG.
@@ -341,10 +341,10 @@ sirc: sh ip route connected
 @EDGE:
 config t
 router ospf 1
-router-id _.0.0.1
+router-id 21.0.0.1
 network 200.0.0.0  0.0.0.255 area 0
-network 10._._.0  0.0.0.255 area 0
-network _.0.0.1  0.0.0.0 area 0
+network 10.21.21.0  0.0.0.255 area 0
+network 21.0.0.1  0.0.0.0 area 0
 Interface gi 0/0/0
  ip ospf network point-to-point
 end
@@ -352,8 +352,8 @@ end
 @CoreBABA:
 config t
 router ospf 1
-router-id 10._._.4
-network 10._.0.0  0.0.255.255 area 0
+router-id 10.21.21.4
+network 10.21.0.0  0.0.255.255 area 0
 int gi 0/1
  ip ospf network point-to-point
 end
@@ -361,8 +361,8 @@ end
 @CUCM:
 config t
 router ospf 1
-router-id 10.41.100.8
-network 10.41.100.0  0.0.0.255  area 0
+router-id 10.21.100.8
+network 10.21.100.0  0.0.0.255  area 0
 end
 
 
@@ -413,14 +413,14 @@ route  add  200.0.0.0   mask  255.255.255.0   10._.1.4
 ********************************************
 
  
-@@@@@@@@@
+@@@@@@@@@IVRS: Interactive Voice Response System
 
 config t
 dial-peer voice 69 voip
  service rivanaa out-bound
- destination-pattern _69
- session target ipv4:10._.100.8
- incoming called-number _69
+ destination-pattern 2169
+ session target ipv4:10.21.100.8
+ incoming called-number 2169
  dtmf-relay h245-alphanumeric
  codec g711ulaw
  no vad
@@ -443,13 +443,13 @@ application
   param max-time-vm-retry 2
   param voice-mail 1234
   param max-time-call-retry 700
-  param aa-pilot _69
+  param aa-pilot 2169
  service rivanqueue flash:app-b-acd-3.0.0.2.tcl
   param queue-len 15
-  param aa-hunt1 _00
-  param aa-hunt2 _77
-  param aa-hunt3 _01
-  param aa-hunt4 _33
+  param aa-hunt1 2100
+  param aa-hunt2 2177
+  param aa-hunt3 2101
+  param aa-hunt4 2133
   param queue-manager-debugs 1
   param number-of-hunt-grps 4
 ****************************************************************************
