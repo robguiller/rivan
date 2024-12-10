@@ -87,6 +87,7 @@ ip dhcp pool WIFIDATA
    default-router 10.21.10.4
    domain-name WIFIDATA.COM
    dns-server 10.21.1.10
+
 ip dhcp pool IPCCTV
    network 10.21.50.0 255.255.255.0
    default-router 10.21.50.4
@@ -157,12 +158,12 @@ show ip dhcp binding
 !!cisco unified call manager Express command
 !@@@CUCM-M
 config t
-hostname CUCM-21
-enable secret pass
-service password-encryption
-no logging console 
-no ip domain-lookup
-line console 0
+	hostname CUCM-21
+	enable secret pass
+	service password-encryption
+	no logging console 
+	no ip domain-lookup
+	line console 0
 password pass
 login
 exec-timeout 0 0
@@ -173,7 +174,7 @@ exec-timeout 0 0
 Int Fa 0/0
 no shutdown
 ip add 10.21.100.8 255.255.255.0
-en
+end
 
    
 !!!CUCM ANALOG PHONES CONFIG
@@ -424,8 +425,8 @@ end
 
 !How to Static Route windows Server:
 cmd
-route  add   10.0.0.0   mask   255.0.0.0    10._.1.4
-route  add  200.0.0.0   mask  255.255.255.0   10._.1.4
+route  add   10.0.0.0   mask   255.0.0.0    10.21.1.4
+route  add  200.0.0.0   mask  255.255.255.0   10.21.1.4
 
 ********************************************
 
