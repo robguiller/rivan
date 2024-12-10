@@ -156,7 +156,24 @@ show ip dhcp binding
 
 !!cisco unified call manager Express command
 !@@@CUCM-M
-
+config t
+hostname CUCM-21
+enable secret pass
+service password-encryption
+no logging console 
+no ip domain-lookup
+line console 0
+password pass
+login
+exec-timeout 0 0
+line vty 0 14
+password pass
+login
+exec-timeout 0 0
+Int Fa 0/0
+no shutdown
+ip add 10.21.100.8 255.255.255.0
+en
 
    
 !!!CUCM ANALOG PHONES CONFIG
